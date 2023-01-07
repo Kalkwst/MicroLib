@@ -1,4 +1,6 @@
-﻿namespace Text;
+﻿using System.Text;
+
+namespace Text;
 
 public static class WordUtils
 {
@@ -62,4 +64,87 @@ public static class WordUtils
         return str.Substring(0, Math.Min(index, upper)) + appendToEnd;
     }
 
+    /// <summary>
+    /// Capitalizes all the whitespace separated words in a string. Only the first character of each word is changed.
+    /// </summary>
+    /// <param name="str">The string to capitalize, may be null.</param>
+    /// <returns>The capitalized string, or null for null string input.</returns>
+    /// <example>
+    /// WordUtils.Capitalize(null) = null <br/>
+    /// WordUtils.Capitalize("") = "" <br/>
+    /// WordUtils.Capitalize("i am FINE") = "I Am FINE"
+    /// </example>
+    /// <seealso cref="CapitalizeFully"/>
+    /// <seealso cref="Uncapitalize"/>
+    public static string Capitalize(string str)
+    {
+        return Capitalize(str, null);
+    }
+
+    /// <summary>
+    /// Capitalizes all the delimiter separated words in a string. Only the first character of each word is changed.
+    /// </summary>
+    /// <param name="str">The string to capitalize, may be null.</param>
+    /// <param name="delimiters">A set of characters to determine capitalization. Null is treated as whitespace.</param>
+    /// <returns>The capitalized string, or null for null string input.</returns>
+    /// <remarks>
+    /// The delimiters represent a set of characters understood to separate words. The first string character and the
+    /// first non-delimiter character after a delimiter will be capitalized.
+    /// </remarks>
+    /// <example>
+    /// WordUtils.Capitalize(null, '*') = null <br/>
+    /// WordUtils.Capitalize("", '*') = null <br/>
+    /// WordUtils.Capitalize("i am fine", null) = "I Am Fine" <br/>
+    /// WordUtils.Capitalize("I am fine", new char[]{}) = "I am fine"
+    /// </example>
+    /// <seealso cref="CapitalizeFully"/>
+    /// <seealso cref="Uncapitalize"/>
+    public static string Capitalize(string str, params char[]? delimiters)
+    {
+        if (string.IsNullOrEmpty(str))
+            return str;
+
+        var delimiterSet = GenerateDelimiterSet(delimiters);
+        var sb = new StringBuilder(str.Length);
+
+        var capitalizeNext = true;
+        foreach (var c in str)
+        {
+            if (delimiterSet.Contains(c))
+            {
+                capitalizeNext = true;
+                sb.Append(c);
+            }
+            else if (capitalizeNext)
+            {
+                sb.Append(char.ToUpper(c));
+                capitalizeNext = false;
+            }
+            else
+            {
+                sb.Append(c);
+            }
+        }
+
+        return sb.ToString();
+    }
+
+    private static HashSet<int> GenerateDelimiterSet(IReadOnlyList<char>? delimiters)
+    {
+        var delimiterHashSet = new HashSet<int>();
+        if (delimiters == null || delimiters.Count == 0)
+        {
+            if (delimiters == null)
+            {
+                delimiterHashSet.Add(' ');
+            }
+            return delimiterHashSet;
+        }
+
+        foreach (var t in delimiters)
+        {
+            delimiterHashSet.Add(t);
+        }
+        return delimiterHashSet;
+    }
 }
