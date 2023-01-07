@@ -55,6 +55,18 @@ public class WordUtilsTests
     {
         Assert.That(WordUtils.Abbreviate(str, lower, upper, appendToEnd), Is.EqualTo(expected));
     }
-    
-    
+
+    [TestCase(null, null)]
+    [TestCase("", "")]
+    [TestCase(" ", " ")]
+    [TestCase("I", "I")]
+    [TestCase("i", "I")]
+    [TestCase("i am here 123", "I Am Here 123")]
+    [TestCase("I Am Here 123", "I Am Here 123")]
+    [TestCase("I Am HERE 123", "I Am HERE 123")]
+    [TestCase("I AM HERE 123", "I AM HERE 123")]
+    public void Capitalize_ReturnsExpectedResults(string str, string expected)
+    {
+        Assert.That(WordUtils.Capitalize(str), Is.EqualTo(expected));
+    }
 }
