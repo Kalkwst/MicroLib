@@ -1,7 +1,4 @@
-﻿using System.Text;
-using System;
-
-namespace Text;
+﻿namespace Text;
 
 public class WordUtils
 {
