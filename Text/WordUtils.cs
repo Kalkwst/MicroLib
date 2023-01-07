@@ -1,6 +1,6 @@
 ﻿namespace Text;
 
-public class WordUtils
+public static class WordUtils
 {
     /// <summary>
     /// Abbreviates the words nicely.
