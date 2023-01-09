@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Text;
 
@@ -165,6 +166,29 @@ public static class WordUtils
 
         str = str.ToLower(CultureInfo.InvariantCulture);
         return Capitalize(str, delimiters);
+    }
+
+    /// <summary>
+    /// Checks if the string contains all the words in the given array.
+    /// </summary>
+    /// <param name="str">The string to check, may be null.</param>
+    /// <param name="words">The array of words to search for, may be null.</param>
+    /// <returns>True if all search words are found, false otherwise.</returns>
+    /// <remarks>
+    /// A null string will return false. A null, zero length search array or if one element of the array is null, will
+    /// return null.
+    /// </remarks>
+    /// <example>
+    /// WordUtils.ContainsAllWords(null, *) = false <br/>
+    /// WordUtils.ContainsAllWords("abcd", "ab", "cd") = false <br/>
+    /// WordUtils.ContainsAllWords("abc, def", "def", "abc") = true
+    /// </example>
+    public static bool ContainsAllWords(string str, params string[]? words)
+    {
+        if (string.IsNullOrEmpty(str) || words == null || !words.Any())
+            return false;
+
+        return words.All(word => !string.IsNullOrEmpty(word) && Regex.IsMatch(str, $@"\b{word}\b"));
     }
     
     private static HashSet<int> GenerateDelimiterSet(IReadOnlyList<char>? delimiters)
