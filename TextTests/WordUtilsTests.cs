@@ -45,7 +45,7 @@ public class WordUtilsTests
     {
         Assert.That(WordUtils.Abbreviate(str, lower, upper, appendToEnd), Is.EqualTo(expected));
     }
-    
+
     [TestCase("0123456789", 0, 5, "-", "01234-")]
     [TestCase("012 3456789", 2, 5, null, "012")]
     [TestCase("0123456789", 0, -1, "", "0123456789")]
@@ -68,5 +68,31 @@ public class WordUtilsTests
     public void Capitalize_ReturnsExpectedResults(string str, string expected)
     {
         Assert.That(WordUtils.Capitalize(str), Is.EqualTo(expected));
+    }
+
+    [TestCase(null, null)]
+    [TestCase("", "")]
+    [TestCase(" ", " ")]
+    [TestCase("I", "I")]
+    [TestCase("i", "I")]
+    [TestCase("i am here 123", "I Am Here 123")]
+    [TestCase("I Am Here 123", "I Am Here 123")]
+    [TestCase("I Am HERE 123", "I Am Here 123")]
+    [TestCase("I AM HERE 123", "I Am Here 123")]
+    public void CapitalizeFully_ReturnsExpectedResults(string str, string expected)
+    {
+        Assert.That(WordUtils.CapitalizeFully(str), Is.EqualTo(expected));
+    }
+
+    [TestCase("I", "I")]
+    [TestCase("i", "I")]
+    [TestCase("i-am here+123", "I-Am Here+123")]
+    [TestCase("I Am+Here-123", "I Am+Here-123")]
+    [TestCase("i+am-HERE 123", "I+Am-Here 123")]
+    [TestCase("I-AM HERE+123", "I-Am Here+123")]
+    public void CapitalizeFully_WithDelimiters_ReturnsExpectedResults(string str, string expected)
+    {
+        char[] delimiters = { '-', '+', ' ', '@' };
+        Assert.That(WordUtils.CapitalizeFully(str, delimiters), Is.EqualTo(expected));
     }
 }

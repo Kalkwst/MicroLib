@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Globalization;
+using System.Text;
 
 namespace Text;
 
@@ -129,6 +130,43 @@ public static class WordUtils
         return sb.ToString();
     }
 
+    /// <summary>
+    /// Converts all the whitespace separated words in a string into capitalized words, that is each word is made up
+    /// of a title-case character and then a series of lowercase characters.
+    /// </summary>
+    /// <param name="str">the string to capitalize, may be null.</param>
+    /// <returns>the capitalized string, or null for null string input.</returns>
+    /// <example>
+    /// WordUtils.CapitalizeFully(null) = null <br/>
+    /// WordUtils.CapitalizeFully("") = "" <br/>
+    /// WordUtils.Capitalize("i am FINE") = "I Am Fine" <br/>
+    /// </example>
+    public static string CapitalizeFully(string str)
+    {
+        return CapitalizeFully(str, null);
+    }
+
+    /// <summary>
+    /// Converts all the delimiter separated words in a string into capitalized words, that is each word is made up of a
+    /// titlecase character and then a series lowercase characters.
+    /// </summary>
+    /// <param name="str">the string to capitalize.</param>
+    /// <param name="delimiters">set of characters to determine capitalization, null means whitespace.</param>
+    /// <returns>the capitalized string, or null if null string input.</returns>
+    /// <example>
+    /// WordUtils.CapitalizeFully(null, *) = null <br/>
+    /// WordUtils.CapitalizeFully("", *) = "" <br/>
+    /// WordUtils.CapitalizeFully("i aM.fine", new char[]{'.'}) = "I am.Fine"
+    /// </example>
+    public static string CapitalizeFully(string str, params char[]? delimiters)
+    {
+        if (string.IsNullOrEmpty(str))
+            return str;
+
+        str = str.ToLower(CultureInfo.InvariantCulture);
+        return Capitalize(str, delimiters);
+    }
+    
     private static HashSet<int> GenerateDelimiterSet(IReadOnlyList<char>? delimiters)
     {
         var delimiterHashSet = new HashSet<int>();
