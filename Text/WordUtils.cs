@@ -214,19 +214,9 @@ public static class WordUtils
         }
 
         var sb = new StringBuilder(str.Length);
-        var whitespace = true;
         foreach (var c in str)
         {
-            if (char.IsUpper(c))
-            {
-                sb.Append(char.ToLower(c));
-                whitespace = false;
-            }
-            else
-            {
-                sb.Append(char.ToUpper(c));
-                whitespace = false;
-            }
+            sb.Append(char.IsUpper(c) ? char.ToLower(c) : char.ToUpper(c));
         }
 
         return sb.ToString();
