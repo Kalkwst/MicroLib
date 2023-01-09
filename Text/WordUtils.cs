@@ -222,6 +222,62 @@ public static class WordUtils
         return sb.ToString();
     }
 
+    /// <summary>
+    /// Uncapitalizes all the whitespace separated words in a string. Only the first character of each word is changed.
+    /// </summary>
+    /// <param name="str">The string to uncapitalize, may be null.</param>
+    /// <returns>The uncapitalized string, or null for null string input.</returns>
+    /// <example>
+    /// WordUtils.Uncapitalize(null) = null <br/>
+    /// WordUtils.Uncapitalize("") = "" <br/>
+    /// WordUtils.Uncapitalize("I Am FINE") = "i am fINE"
+    /// </example>
+    public static string Uncapitalize(string str)
+    {
+        return Uncapitalize(str, null);
+    }
+    
+    /// <summary>
+    /// Uncapitalizes all the whitespace separated words in a string. Only the first character of each word is changed.
+    /// </summary>
+    /// <param name="str">The string to uncapitalize, may be null.</param>
+    /// <param name="delimiters">A set of characters to determine uncapitalization. Null means whitespace.</param>
+    /// <returns>The uncapitalized string, or null for null string input.</returns>
+    /// <remarks>
+    /// The delimiters represent a set of characters understood to separate words. The first string character and the
+    ///first non-delimiter character after a delimiter will be uncapitalized.
+    /// </remarks>
+    public static string Uncapitalize(string str, params char[]? delimiters)
+    {
+        if (string.IsNullOrEmpty(str))
+            return str;
+
+        var delimiterSet = GenerateDelimiterSet(delimiters);
+        var sb = new StringBuilder(str.Length);
+
+        bool uncapitalizeNext = true;
+        foreach (var c in str)
+        {
+            if (delimiterSet.Contains(c))
+            {
+                uncapitalizeNext = true;
+                sb.Append(c);
+            }
+            else if (uncapitalizeNext)
+            {
+                sb.Append(char.ToLower(c));
+                uncapitalizeNext = false;
+            }
+            else
+            {
+                sb.Append(c);
+            }
+        }
+
+        return sb.ToString();
+    }
+
+
     private static HashSet<int> GenerateDelimiterSet(IReadOnlyList<char>? delimiters)
     {
         var delimiterHashSet = new HashSet<int>();
