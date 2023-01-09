@@ -95,4 +95,32 @@ public class WordUtilsTests
         char[] delimiters = { '-', '+', ' ', '@' };
         Assert.That(WordUtils.CapitalizeFully(str, delimiters), Is.EqualTo(expected));
     }
+
+    [TestCase(null, null, false)]
+    [TestCase(null, new string[] { "" }, false)]
+    [TestCase(null, new string[] { "ab" }, false)]
+    public void ContainsAllWords_WithNullString_ReturnsFalse(string str, string[] terms, bool expected)
+    {
+        Assert.That(WordUtils.ContainsAllWords(str, terms), Is.EqualTo(expected));
+    }
+
+    [TestCase("", null, false)]
+    [TestCase("", new string[] { "" }, false)]
+    [TestCase("", new string[] { "ab" }, false)]
+    public void ContainsAllWords_WithEmptyString_ReturnsFalse(string str, string[] terms, bool expected)
+    {
+        Assert.That(WordUtils.ContainsAllWords(str, terms), Is.EqualTo(expected));
+    }
+
+    [TestCase("foo", null, false)]
+    [TestCase("bar", new string[] { "" }, false)]
+    [TestCase("zzabyyxdxx", new string[] { "ab" }, false)]
+    [TestCase("lorem ipsum dolor sit amet", new string[] { "ipsum", "lorem", "dolor" }, true)]
+    [TestCase("lorem ipsum dolor sit amet", new string[] { "ipsum", null, "lorem", "dolor" }, false)]
+    [TestCase("lorem null ipsum dolor sit amet", new string[] { "ipsum", null, "lorem", "dolor" }, false)]
+    public void ContainsAllWords_WithValidStringAndTerms_ReturnsExpectedResults(string str, string[] terms,
+        bool expected)
+    {
+        Assert.That(WordUtils.ContainsAllWords(str, terms), Is.EqualTo(expected));
+    }
 }
