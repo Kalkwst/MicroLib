@@ -131,7 +131,7 @@ public class WordUtilsTests
     {
         Assert.That(WordUtils.SwapCase(str), Is.EqualTo(expected));
     }
-    
+
     [TestCase("I", "i")]
     [TestCase("i", "I")]
     [TestCase("i am here 123", "I AM HERE 123")]
@@ -142,4 +142,46 @@ public class WordUtilsTests
     {
         Assert.That(WordUtils.SwapCase(str), Is.EqualTo(expected));
     }
+
+    [TestCase(null, null)]
+    [TestCase("", "")]
+    [TestCase(" ", " ")]
+    public void Uncapitalize_WithoutDelimiterListAndEmptyInput_ReturnsExpectedResults(string str, string expected)
+    {
+        Assert.That(WordUtils.Uncapitalize(str), Is.EqualTo(expected));
+    }
+
+    [TestCase("I", "i")]
+    [TestCase("i", "i")]
+    [TestCase("i am here 123", "i am here 123")]
+    [TestCase("I Am Here 123", "i am here 123")]
+    [TestCase("i am HERE 123", "i am hERE 123")]
+    [TestCase("I AM HERE 123", "i aM hERE 123")]
+    public void Uncapitalize_WithoutDelimiterListAndRandomCasedStringInput_ReturnsExpectedResults(string str,
+        string expected)
+    {
+        Assert.That(WordUtils.Uncapitalize(str), Is.EqualTo(expected));
+    }
+
+    [TestCase(null, null, null)]
+    [TestCase("", new char[]{}, "")]
+    [TestCase(" ", new char[]{}, " ")]
+    public void Uncapitalize_WithEmptyDelimiterListAndEmptyInput_ReturnsExpectedResults(string str, char[]? delimiters,
+        string expected)
+    {
+        Assert.That(WordUtils.Uncapitalize(str, delimiters), Is.EqualTo(expected));
+    }
+    
+    [TestCase("I", new char[]{'-', '+', ' ', '@'}, "i")]
+    [TestCase("i", new char[]{'-', '+', ' ', '@'}, "i")]
+    [TestCase("i am-here+123", new char[]{'-', '+', ' ', '@'}, "i am-here+123")]
+    [TestCase("I+Am Here-123", new char[]{'-', '+', ' ', '@'}, "i+am here-123")]
+    [TestCase("i-am+HERE 123", new char[]{'-', '+', ' ', '@'}, "i-am+hERE 123")]
+    [TestCase("I AM-HERE+123", new char[]{'-', '+', ' ', '@'}, "i aM-hERE+123")]
+    public void Uncapitalize_WithDelimiterListAndInput_ReturnsExpectedResults(string str, char[]? delimiters,
+        string expected)
+    {
+        Assert.That(WordUtils.Uncapitalize(str, delimiters), Is.EqualTo(expected));
+    }
+
 }
