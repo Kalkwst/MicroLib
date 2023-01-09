@@ -9,10 +9,11 @@ public class CosineSimilarityTests
     public void CosineSimilarityReturnsDoubleWhereByteValueIsZero()
     {
         var cosineSimilarity = new CosineSimilarity();
-
-        var result = cosineSimilarity.Calculate("", "");
-
-        Assert.That(result, Is.EqualTo(0.0).Within(0.01));
+        
+        Assert.Throws<ArgumentException>(() =>
+        {
+            cosineSimilarity.Calculate("","");
+        });
     }
 
     [Test]
@@ -20,7 +21,7 @@ public class CosineSimilarityTests
     {
         var cosineSimilarity = new CosineSimilarity();
         
-        Assert.Throws<ArgumentNullException>(() =>
+        Assert.Throws<ArgumentException>(() =>
         {
             cosineSimilarity.Calculate("string", null);
         });
