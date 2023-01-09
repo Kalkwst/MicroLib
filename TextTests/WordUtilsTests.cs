@@ -123,4 +123,23 @@ public class WordUtilsTests
     {
         Assert.That(WordUtils.ContainsAllWords(str, terms), Is.EqualTo(expected));
     }
+
+    [TestCase(null, null)]
+    [TestCase("", "")]
+    [TestCase(" ", " ")]
+    public void SwapCase_WithNullOrEmptyInput_ReturnsExpectedResults(string str, string expected)
+    {
+        Assert.That(WordUtils.SwapCase(str), Is.EqualTo(expected));
+    }
+    
+    [TestCase("I", "i")]
+    [TestCase("i", "I")]
+    [TestCase("i am here 123", "I AM HERE 123")]
+    [TestCase("I Am Here 123", "i aM hERE 123")]
+    [TestCase("i am HERE 123", "I AM here 123")]
+    [TestCase("I AM HERE 123", "i am here 123")]
+    public void SwapCase_WithVariousCasesInput_ReturnsExpectedResults(string str, string expected)
+    {
+        Assert.That(WordUtils.SwapCase(str), Is.EqualTo(expected));
+    }
 }
