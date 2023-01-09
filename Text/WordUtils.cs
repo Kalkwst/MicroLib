@@ -45,11 +45,11 @@ public static class WordUtils
 
         if (string.IsNullOrEmpty(str))
             return str;
-    
+
         // If the lower value is greater than the lenght of the string, set to the length of the string
         if (lower > str.Length)
             lower = str.Length;
-    
+
         // If the upper value is -1 (meaning there is no limit) or is greater than the length of the string, set to the
         // length of the string.
         if (upper == -1 || upper > str.Length)
@@ -190,7 +190,48 @@ public static class WordUtils
 
         return words.All(word => !string.IsNullOrEmpty(word) && Regex.IsMatch(str, $@"\b{word}\b"));
     }
-    
+
+    /// <summary>
+    /// Swaps the case of a string using a word based algorithm.
+    /// <list type="bullet">
+    ///     <item>Upper case character converts to lower case.</item>
+    ///     <item>Lower case character after whitespace is converted to upper case.</item>
+    ///     <item>Lower case characters are converted to upper case.</item>
+    /// </list>
+    /// </summary>
+    /// <param name="str">The string to swap case, may be null.</param>
+    /// <returns>The changed string, or null for null string input.</returns>
+    /// <example>
+    /// WordUtils.SwapCase(null) = null <br/>
+    /// WordUtils.SwapCase("") = "" <br/>
+    /// WordUtils.SwapCase("The dog has a BONE") = "tHE DOG HAS A bone"
+    /// </example>
+    public static string SwapCase(string str)
+    {
+        if (string.IsNullOrEmpty(str))
+        {
+            return str;
+        }
+
+        var sb = new StringBuilder(str.Length);
+        var whitespace = true;
+        foreach (var c in str)
+        {
+            if (char.IsUpper(c))
+            {
+                sb.Append(char.ToLower(c));
+                whitespace = false;
+            }
+            else
+            {
+                sb.Append(char.ToUpper(c));
+                whitespace = false;
+            }
+        }
+
+        return sb.ToString();
+    }
+
     private static HashSet<int> GenerateDelimiterSet(IReadOnlyList<char>? delimiters)
     {
         var delimiterHashSet = new HashSet<int>();
@@ -200,6 +241,7 @@ public static class WordUtils
             {
                 delimiterHashSet.Add(' ');
             }
+
             return delimiterHashSet;
         }
 
@@ -207,6 +249,7 @@ public static class WordUtils
         {
             delimiterHashSet.Add(t);
         }
+
         return delimiterHashSet;
     }
 }
