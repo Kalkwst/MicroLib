@@ -1,4 +1,5 @@
-﻿using Text;
+﻿using System;
+using Text;
 
 namespace TextTests;
 
@@ -116,9 +117,9 @@ public class WordUtilsTests
     [TestCase("bar", new string[] { "" }, false)]
     [TestCase("zzabyyxdxx", new string[] { "ab" }, false)]
     [TestCase("lorem ipsum dolor sit amet", new string[] { "ipsum", "lorem", "dolor" }, true)]
-    [TestCase("lorem ipsum dolor sit amet", new string[] { "ipsum", null, "lorem", "dolor" }, false)]
-    [TestCase("lorem null ipsum dolor sit amet", new string[] { "ipsum", null, "lorem", "dolor" }, false)]
-    public void ContainsAllWords_WithValidStringAndTerms_ReturnsExpectedResults(string str, string[] terms,
+    [TestCase("lorem ipsum dolor sit amet", new string?[] { "ipsum", null, "lorem", "dolor" }, false)]
+    [TestCase("lorem null ipsum dolor sit amet", new string?[] { "ipsum", null, "lorem", "dolor" }, false)]
+    public void ContainsAllWords_WithValidStringAndTerms_ReturnsExpectedResults(string str, string?[] terms,
         bool expected)
     {
         Assert.That(WordUtils.ContainsAllWords(str, terms), Is.EqualTo(expected));
@@ -164,20 +165,20 @@ public class WordUtilsTests
     }
 
     [TestCase(null, null, null)]
-    [TestCase("", new char[]{}, "")]
-    [TestCase(" ", new char[]{}, " ")]
+    [TestCase("", new char[] { }, "")]
+    [TestCase(" ", new char[] { }, " ")]
     public void Uncapitalize_WithEmptyDelimiterListAndEmptyInput_ReturnsExpectedResults(string str, char[]? delimiters,
         string expected)
     {
         Assert.That(WordUtils.Uncapitalize(str, delimiters), Is.EqualTo(expected));
     }
-    
-    [TestCase("I", new char[]{'-', '+', ' ', '@'}, "i")]
-    [TestCase("i", new char[]{'-', '+', ' ', '@'}, "i")]
-    [TestCase("i am-here+123", new char[]{'-', '+', ' ', '@'}, "i am-here+123")]
-    [TestCase("I+Am Here-123", new char[]{'-', '+', ' ', '@'}, "i+am here-123")]
-    [TestCase("i-am+HERE 123", new char[]{'-', '+', ' ', '@'}, "i-am+hERE 123")]
-    [TestCase("I AM-HERE+123", new char[]{'-', '+', ' ', '@'}, "i aM-hERE+123")]
+
+    [TestCase("I", new char[] { '-', '+', ' ', '@' }, "i")]
+    [TestCase("i", new char[] { '-', '+', ' ', '@' }, "i")]
+    [TestCase("i am-here+123", new char[] { '-', '+', ' ', '@' }, "i am-here+123")]
+    [TestCase("I+Am Here-123", new char[] { '-', '+', ' ', '@' }, "i+am here-123")]
+    [TestCase("i-am+HERE 123", new char[] { '-', '+', ' ', '@' }, "i-am+hERE 123")]
+    [TestCase("I AM-HERE+123", new char[] { '-', '+', ' ', '@' }, "i aM-hERE+123")]
     public void Uncapitalize_WithDelimiterListAndInput_ReturnsExpectedResults(string str, char[]? delimiters,
         string expected)
     {

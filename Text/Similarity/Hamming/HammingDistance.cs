@@ -20,7 +20,7 @@ public class HammingDistance : IEditDistance<int>
     /// <returns>The number of differences between the two strings</returns>
     /// <exception cref="ArgumentNullException">If any of the two strings is null.</exception>
     /// <exception cref="ArgumentException">If the strings do not have the same length.</exception>
-    public int Calculate(string left, string right)
+    public int Calculate(string? left, string? right)
     {
         if (left == null || right == null)
             throw new ArgumentNullException(left == null ? nameof(left) : nameof(right), "Strings must not be null");

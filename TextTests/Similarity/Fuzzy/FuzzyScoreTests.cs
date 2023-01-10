@@ -7,7 +7,7 @@ namespace TextTests.Similarity.Fuzzy;
 public class FuzzyScoreTests
 {
     private static readonly FuzzyScore EnglishScore = new FuzzyScore(CultureInfo.GetCultureInfo("en-US"));
-    
+
     [TestCase("", "", 0)]
     [TestCase("Workshop", "b", 0)]
     [TestCase("Room", "o", 1)]
@@ -18,7 +18,7 @@ public class FuzzyScoreTests
     {
         Assert.That(EnglishScore.CalculateFuzzyScore(term, query), Is.EqualTo(expectedScore));
     }
-    
+
     [Test]
     public void FuzzyScore_NullNullLocale_ThrowsArgumentException()
     {
@@ -36,7 +36,7 @@ public class FuzzyScoreTests
     {
         Assert.That(() => EnglishScore.CalculateFuzzyScore("not null", null), Throws.TypeOf<ArgumentNullException>());
     }
-    
+
     [Test]
     public void Constructor_NullLocale_ThrowsArgumentException()
     {

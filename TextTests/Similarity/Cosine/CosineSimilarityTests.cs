@@ -9,21 +9,15 @@ public class CosineSimilarityTests
     public void CosineSimilarityReturnsDoubleWhereByteValueIsZero()
     {
         var cosineSimilarity = new CosineSimilarity();
-        
-        Assert.Throws<ArgumentException>(() =>
-        {
-            cosineSimilarity.Calculate("","");
-        });
+
+        Assert.Throws<ArgumentException>(() => cosineSimilarity.Calculate("", ""));
     }
 
     [Test]
     public void CosineSimilarityThrowsArgumentNullExceptionForNullDictionary()
     {
         var cosineSimilarity = new CosineSimilarity();
-        
-        Assert.Throws<ArgumentException>(() =>
-        {
-            cosineSimilarity.Calculate("string", null);
-        });
+
+        Assert.Throws<ArgumentException>(() => cosineSimilarity.Calculate("string", null));
     }
 }

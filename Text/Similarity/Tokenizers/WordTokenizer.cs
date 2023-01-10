@@ -9,7 +9,7 @@ namespace Text.Similarity.Tokenizers;
 public sealed class WordTokenizer : ITokenizer<string>
 {
     private const string _pattern = @"(\w)+";
-    
+
     /// <summary>
     /// Splits the provided string to words.
     /// </summary>
@@ -18,13 +18,13 @@ public sealed class WordTokenizer : ITokenizer<string>
     /// A string array containing all of the words generated from the provided <paramref name="text"/>.
     /// </returns>
     /// <exception cref="ArgumentException">If the <paramref name="text"/> is null, empty or whitespace only.</exception>
-    public string[] Tokenize(string text)
+    public string[] Tokenize(string? text)
     {
         if (string.IsNullOrEmpty(text) || string.IsNullOrWhiteSpace(text))
             throw new ArgumentException("Text must not be null, empty or whitespace only");
 
         var tokens = new List<string>();
-        
+
         foreach (Match m in Regex.Matches(text, _pattern))
             tokens.Add(m.Value);
 
