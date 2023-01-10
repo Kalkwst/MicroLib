@@ -11,5 +11,5 @@ public interface ITokenizer<T>
     /// </summary>
     /// <param name="text">The input text.</param>
     /// <returns>An array of tokens.</returns>
-    public T[] Tokenize(string text);
+    public T[] Tokenize(string? text);
 }

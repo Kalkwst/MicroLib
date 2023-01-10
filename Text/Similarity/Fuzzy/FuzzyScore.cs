@@ -6,16 +6,18 @@ public class FuzzyScore
 {
     private readonly CultureInfo info;
 
-    public FuzzyScore(CultureInfo info)
+    public FuzzyScore(CultureInfo? info)
     {
         this.info = info ?? throw new ArgumentNullException(nameof(info));
     }
 
-    public int CalculateFuzzyScore(string term, string query)
+    public int CalculateFuzzyScore(string? term, string? query)
     {
         if (term == null || query == null)
+        {
             throw new ArgumentNullException(term == null ? nameof(term) : nameof(query)
                 , "Strings must not be null");
+        }
 
         var lowerCaseTerm = term.ToLower(info);
         var lowerCaseQuery = query.ToLower(info);

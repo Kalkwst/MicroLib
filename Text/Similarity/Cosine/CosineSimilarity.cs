@@ -15,7 +15,7 @@ public class CosineSimilarity : ISimilarityScore<double>
     /// <param name="left">The first string.</param>
     /// <param name="right">The second string.</param>
     /// <returns>The cosine similarity between the two strings.</returns>
-    public double Calculate(string left, string right)
+    public double Calculate(string? left, string? right)
     {
         var leftTokens = _tokenizer.Tokenize(left);
         var rightTokens = _tokenizer.Tokenize(right);
@@ -25,7 +25,7 @@ public class CosineSimilarity : ISimilarityScore<double>
 
         return GetCosineSimilarity(leftVector, rightVector);
     }
-    
+
     private double GetCosineSimilarity(Dictionary<string, int> leftVector, Dictionary<string, int> rightVector)
     {
         if (leftVector == null || rightVector == null)
@@ -67,5 +67,5 @@ public class CosineSimilarity : ISimilarityScore<double>
         return intersection;
     }
 
-    
+
 }

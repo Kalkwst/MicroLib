@@ -183,9 +183,9 @@ public static class WordUtils
     /// WordUtils.ContainsAllWords("abcd", "ab", "cd") = false <br/>
     /// WordUtils.ContainsAllWords("abc, def", "def", "abc") = true
     /// </example>
-    public static bool ContainsAllWords(string str, params string[]? words)
+    public static bool ContainsAllWords(string str, params string?[] words)
     {
-        if (string.IsNullOrEmpty(str) || words == null || !words.Any())
+        if (string.IsNullOrEmpty(str) || words?.Any() != true)
             return false;
 
         return words.All(word => !string.IsNullOrEmpty(word) && Regex.IsMatch(str, $@"\b{word}\b"));
@@ -236,7 +236,7 @@ public static class WordUtils
     {
         return Uncapitalize(str, null);
     }
-    
+
     /// <summary>
     /// Uncapitalizes all the whitespace separated words in a string. Only the first character of each word is changed.
     /// </summary>
