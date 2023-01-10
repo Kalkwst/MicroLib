@@ -6,7 +6,7 @@ namespace TextTests.Similarity.Fuzzy;
 [TestFixture]
 public class FuzzyScoreTests
 {
-    private static readonly FuzzyScore EnglishScore = new FuzzyScore(CultureInfo.GetCultureInfo("en-US"));
+    private static readonly FuzzyScore EnglishScore = new(CultureInfo.GetCultureInfo("en-US"));
 
     [TestCase("", "", 0)]
     [TestCase("Workshop", "b", 0)]

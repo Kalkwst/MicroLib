@@ -6,7 +6,7 @@
 /// </summary>
 public class JaccardDistance : IEditDistance<double>
 {
-    private readonly JaccardSimilarity similarity = new JaccardSimilarity();
+    private readonly JaccardSimilarity similarity = new();
 
     /// <summary>
     /// Calculates the Jaccard distance of two strings passed as input.
@@ -18,8 +18,10 @@ public class JaccardDistance : IEditDistance<double>
     public double Calculate(string left, string right)
     {
         if (left == null || right == null)
+        {
             throw new ArgumentNullException(left == null ? nameof(left) : nameof(right),
                 "Input cannot be null");
+        }
 
         return 1.0 - similarity.Calculate(left, right);
     }

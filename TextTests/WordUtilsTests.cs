@@ -184,5 +184,4 @@ public class WordUtilsTests
     {
         Assert.That(WordUtils.Uncapitalize(str, delimiters), Is.EqualTo(expected));
     }
-
 }

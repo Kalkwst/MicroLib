@@ -16,7 +16,7 @@ public class JaroWinklerSimilarity : ISimilarityScore<double>
         string max = first.Length > second.Length ? first : second;
         string min = first.Length > second.Length ? second : first;
 
-        var range = Math.Max(max.Length / 2 - 1, 0);
+        var range = Math.Max((max.Length / 2) - 1, 0);
 
         var matchIndices = new int[min.Length];
         for (var i = 0; i < matchIndices.Length; i++)
@@ -111,7 +111,7 @@ public class JaroWinklerSimilarity : ISimilarityScore<double>
         if (m == 0)
             return 0d;
 
-        var j = (m / left.Length + m / right.Length + (m - (double)mpt[1] / 2) / m) / 3;
-        return j < 0.7d ? j : j + defaultScalingFactor * mpt[2] * (1d - j);
+        var j = ((m / left.Length) + (m / right.Length) + ((m - ((double)mpt[1] / 2)) / m)) / 3;
+        return j < 0.7d ? j : j + (defaultScalingFactor * mpt[2] * (1d - j));
     }
 }

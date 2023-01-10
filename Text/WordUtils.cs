@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
+using System;
 
 namespace Text;
 
@@ -60,10 +61,10 @@ public static class WordUtils
         if (index == -1)
         {
             // only if abbreviation has occurred do we append the appendToEnd value
-            return upper != str.Length ? str.Substring(0, upper) + appendToEnd : str;
+            return upper != str.Length ? string.Concat(str.AsSpan(0, upper), appendToEnd) : str;
         }
 
-        return str.Substring(0, Math.Min(index, upper)) + appendToEnd;
+        return str[..Math.Min(index, upper)] + appendToEnd;
     }
 
     /// <summary>
@@ -276,7 +277,6 @@ public static class WordUtils
 
         return sb.ToString();
     }
-
 
     private static HashSet<int> GenerateDelimiterSet(IReadOnlyList<char>? delimiters)
     {

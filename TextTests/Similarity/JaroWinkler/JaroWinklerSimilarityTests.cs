@@ -5,7 +5,7 @@ namespace TextTests.Similarity.JaroWinkler;
 [TestFixture]
 public class JaroWinklerSimilarityTests
 {
-    private JaroWinklerSimilarity similarity;
+    private JaroWinklerSimilarity similarity = null!;
 
     [SetUp]
     public void Init()
@@ -18,7 +18,7 @@ public class JaroWinklerSimilarityTests
     [TestCase(" ", null)]
     public void JaroWinklerSimilarity_WithNullStrings_ThrowsArgumentNullException(string left, string right)
     {
-        Assert.Throws<ArgumentNullException>(() => { similarity.Calculate(left, right); });
+        Assert.Throws<ArgumentNullException>(() => similarity.Calculate(left, right));
     }
 
     [TestCase("", "", 1d, 0.00001d)]

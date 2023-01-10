@@ -5,7 +5,7 @@ namespace TextTests.Similarity.JaroWinkler;
 [TestFixture]
 public class JaroWinklerDistanceTests
 {
-    private JaroWinklerDistance distance;
+    private JaroWinklerDistance distance = null!;
 
     [SetUp]
     public void Init()
@@ -13,13 +13,12 @@ public class JaroWinklerDistanceTests
         distance = new JaroWinklerDistance();
     }
 
-
     [TestCase(null, null)]
     [TestCase(null, "clear")]
     [TestCase(" ", null)]
     public void JaroWinklerDistance_WithNullStrings_ThrowsArgumentNullException(string left, string right)
     {
-        Assert.Throws<ArgumentNullException>(() => { distance.Calculate(left, right); });
+        Assert.Throws<ArgumentNullException>(() => distance.Calculate(left, right));
     }
 
     [TestCase("", "", 1 - 1d, 0.00001d)]
@@ -38,7 +37,7 @@ public class JaroWinklerDistanceTests
     [TestCase("/opt/software1", "/opt/software2", 1 - 0.971428d, 0.00001d)]
     [TestCase("aaabcd", "aaacdb", 1 - 0.941666d, 0.00001d)]
     [TestCase("John Horn", "John Hopkins", 1 - 0.911111d, 0.00001d)]
-    public void JaroWinklerDistance_WithValidStrings_ReturnsExpectedDistance(string left, 
+    public void JaroWinklerDistance_WithValidStrings_ReturnsExpectedDistance(string left,
         string right, double expected, double threshold)
     {
         Assert.That(distance.Calculate(left, right), Is.EqualTo(expected).Within(threshold));

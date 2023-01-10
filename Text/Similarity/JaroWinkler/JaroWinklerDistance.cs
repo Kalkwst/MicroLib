@@ -5,7 +5,7 @@
 /// </summary>
 public class JaroWinklerDistance : IEditDistance<double>
 {
-    private readonly JaroWinklerSimilarity similarity = new JaroWinklerSimilarity();
+    private readonly JaroWinklerSimilarity similarity = new();
 
     /// <summary>
     /// Computes the Jaro-Winkler distance between two strings.
@@ -17,8 +17,10 @@ public class JaroWinklerDistance : IEditDistance<double>
     public double Calculate(string left, string right)
     {
         if (left == null || right == null)
-            throw new ArgumentNullException(left == null ? nameof(left) : nameof(right), 
+        {
+            throw new ArgumentNullException(left == null ? nameof(left) : nameof(right),
                 "Strings must not be null");
+        }
 
         return 1 - similarity.Calculate(left, right);
     }
