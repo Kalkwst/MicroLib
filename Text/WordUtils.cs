@@ -76,8 +76,8 @@ public static class WordUtils
     /// WordUtils.Capitalize("") = "" <br/>
     /// WordUtils.Capitalize("i am FINE") = "I Am FINE"
     /// </example>
-    /// <seealso cref="CapitalizeFully"/>
-    /// <seealso cref="Uncapitalize"/>
+    /// <seealso cref="CapitalizeFully(string)"/>
+    /// <seealso cref="Uncapitalize(string)"/>
     public static string Capitalize(string str)
     {
         return Capitalize(str, null);
@@ -99,8 +99,8 @@ public static class WordUtils
     /// WordUtils.Capitalize("i am fine", null) = "I Am Fine" <br/>
     /// WordUtils.Capitalize("I am fine", new char[]{}) = "I am fine"
     /// </example>
-    /// <seealso cref="CapitalizeFully"/>
-    /// <seealso cref="Uncapitalize"/>
+    /// <seealso cref="CapitalizeFully(string, char[])"/>
+    /// <seealso cref="Uncapitalize(string, char[])"/>
     public static string Capitalize(string str, params char[]? delimiters)
     {
         if (string.IsNullOrEmpty(str))
