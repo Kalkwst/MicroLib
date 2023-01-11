@@ -26,11 +26,13 @@ public class CosineSimilarity : ISimilarityScore<double>
         return GetCosineSimilarity(leftVector, rightVector);
     }
 
-    private double GetCosineSimilarity(Dictionary<string, int> leftVector, Dictionary<string, int> rightVector)
+    private static double GetCosineSimilarity(Dictionary<string, int> leftVector, Dictionary<string, int> rightVector)
     {
         if (leftVector == null || rightVector == null)
+        {
             throw new ArgumentNullException(leftVector == null ? nameof(leftVector) : nameof(rightVector),
                 "Vectors cannot be null");
+        }
 
         var intersection = GetIntersection(leftVector, rightVector);
         var dotProduct = GetDotProduct(leftVector, rightVector, intersection);
@@ -38,14 +40,10 @@ public class CosineSimilarity : ISimilarityScore<double>
         var d1 = leftVector.Values.Sum(value => Math.Pow(value, 2));
         var d2 = rightVector.Values.Sum(value => Math.Pow(value, 2));
 
-        double cosineSimilarity;
-
         if (d1 <= 0.0 || d2 <= 0.0)
-            cosineSimilarity = 0.0;
+            return 0.0;
         else
-            cosineSimilarity = dotProduct / (Math.Sqrt(d1) * Math.Sqrt(d2));
-
-        return cosineSimilarity;
+            return dotProduct / (Math.Sqrt(d1) * Math.Sqrt(d2));
     }
 
     private static double GetDotProduct(
@@ -53,7 +51,7 @@ public class CosineSimilarity : ISimilarityScore<double>
         IReadOnlyDictionary<string, int> rightVector,
         IEnumerable<string> intersection)
     {
-        return intersection.Aggregate(0L, (current, key) => current + leftVector[key] * rightVector[key]);
+        return intersection.Aggregate(0L, (current, key) => current + (leftVector[key] * rightVector[key]));
     }
 
     private static IEnumerable<string> GetIntersection(
@@ -66,6 +64,4 @@ public class CosineSimilarity : ISimilarityScore<double>
 
         return intersection;
     }
-
-
 }

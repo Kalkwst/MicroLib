@@ -25,8 +25,10 @@ public sealed class WordTokenizer : ITokenizer<string>
 
         var tokens = new List<string>();
 
-        foreach (Match m in Regex.Matches(text, _pattern))
+        foreach (Match m in Regex.Matches(text, _pattern).Cast<Match>())
+        {
             tokens.Add(m.Value);
+        }
 
         return tokens.ToArray();
     }

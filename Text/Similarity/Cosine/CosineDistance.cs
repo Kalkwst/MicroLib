@@ -9,7 +9,7 @@
 /// </summary>
 public class CosineDistance : IEditDistance<double>
 {
-    private readonly CosineSimilarity _cosineSimilarity = new CosineSimilarity();
+    private readonly CosineSimilarity _cosineSimilarity = new();
 
     /// <summary>
     /// Compares two strings.

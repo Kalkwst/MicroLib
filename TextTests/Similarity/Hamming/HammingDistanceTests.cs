@@ -5,7 +5,7 @@ namespace TextTests.Similarity.Hamming;
 [TestFixture]
 public class HammingDistanceTests
 {
-    private HammingDistance distance;
+    private HammingDistance distance = null!;
 
     [SetUp]
     public void Init()
