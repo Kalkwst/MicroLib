@@ -1,0 +1,21 @@
+name: StyleCop
+on: [push, pull_request]
+
+jobs:
+  stylecop:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Install StyleCop
+      run: dotnet add package StyleCop.Analyzers
+    - name: Copy editorconfig file
+      run: cp .editorconfig StyleCop.json
+    - name: Run StyleCop
+      run: dotnet analyze --verbosity:normal --ruleSet:StyleCop.json
+    - name: Generate report
+      run: dotnet reportgenerator "-reports:stylecop.xml" "-targetdir:reports"
