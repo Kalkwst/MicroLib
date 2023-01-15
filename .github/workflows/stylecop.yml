@@ -12,7 +12,7 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: List projects in the solution
-      run: dotnet sln <solution file>.sln list
+      run: dotnet sln MicroLib.sln list
       id: list-projects
     - name: Install StyleCop and run
       run: |
