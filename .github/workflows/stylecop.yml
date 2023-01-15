@@ -16,7 +16,7 @@ jobs:
       id: list-projects
     - name: Install StyleCop and run
       run: |
-        projects=($(dotnet sln <solution file>.sln list))
+        projects=($(dotnet sln MicroLib.sln list))
         for project in "${projects[@]}"; do
           dotnet add "$project" package StyleCop.Analyzers
           dotnet analyze --verbosity:normal --ruleSet:StyleCop.json "$project"
