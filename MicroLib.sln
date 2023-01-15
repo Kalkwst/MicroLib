@@ -8,6 +8,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph", "Graph\Graph.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphTests", "GraphTests\GraphTests.csproj", "{2AA20D52-44C4-4823-8937-D553B53B45A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Collections", "Collections\Collections.csproj", "{4E413A17-7498-403A-A956-966CB21A0B19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectionsTests", "CollectionsTests\CollectionsTests.csproj", "{437B27C1-AAE1-4845-8972-3C470BCE7A42}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,13 @@ Global
 		{2AA20D52-44C4-4823-8937-D553B53B45A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AA20D52-44C4-4823-8937-D553B53B45A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AA20D52-44C4-4823-8937-D553B53B45A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E413A17-7498-403A-A956-966CB21A0B19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E413A17-7498-403A-A956-966CB21A0B19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E413A17-7498-403A-A956-966CB21A0B19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E413A17-7498-403A-A956-966CB21A0B19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{437B27C1-AAE1-4845-8972-3C470BCE7A42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{437B27C1-AAE1-4845-8972-3C470BCE7A42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{437B27C1-AAE1-4845-8972-3C470BCE7A42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{437B27C1-AAE1-4845-8972-3C470BCE7A42}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
