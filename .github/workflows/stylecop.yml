@@ -11,11 +11,15 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 6.0.x
-    - name: Install StyleCop
-      run: dotnet add package StyleCop.Analyzers
-    - name: Copy editorconfig file
-      run: cp .editorconfig StyleCop.json
-    - name: Run StyleCop
-      run: dotnet analyze --verbosity:normal --ruleSet:StyleCop.json
+    - name: List projects in the solution
+      run: dotnet sln <solution file>.sln list
+      id: list-projects
+    - name: Install StyleCop and run
+      run: |
+        projects=($(dotnet sln <solution file>.sln list))
+        for project in "${projects[@]}"; do
+          dotnet add "$project" package StyleCop.Analyzers
+          dotnet analyze --verbosity:normal --ruleSet:StyleCop.json "$project"
+        done
     - name: Generate report
       run: dotnet reportgenerator "-reports:stylecop.xml" "-targetdir:reports"
