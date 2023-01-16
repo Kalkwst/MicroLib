@@ -19,7 +19,7 @@ jobs:
         projects=($(dotnet sln MicroLib.sln list))
         for project in "${projects[@]}"; do
           project_path=$(find . -type d -name "$project")
-          dotnet add "$project" package StyleCop.Analyzers
+          dotnet add "$project_path" package StyleCop.Analyzers
           dotnet analyze --verbosity:normal --ruleSet:StyleCop.json "$project"
         done
     - name: Generate report
