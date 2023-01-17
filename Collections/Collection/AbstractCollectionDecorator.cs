@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Collections.Extensions;
 
 namespace Collections.Collection;
 
@@ -34,6 +35,12 @@ public abstract class AbstractCollectionDecorator<T> : ICollection<T>
         Decorated().Add(item);
     }
 
+    ///<inheritdoc cref="Extensions.CollectionExtensions.AddAll{T}"/>
+    public virtual void AddAll(IEnumerable<T> elements)
+    {
+        Decorated().AddAll(elements);
+    }
+
     ///<inheritdoc cref="ICollection{T}.Clear"/>
     public virtual void Clear()
     {
@@ -46,16 +53,34 @@ public abstract class AbstractCollectionDecorator<T> : ICollection<T>
         return Decorated().Contains(item);
     }
 
+    ///<inheritdoc cref="Extensions.CollectionExtensions.ContainsAll{T}"/>
+    public virtual bool ContainsAll(IEnumerable<T> elements)
+    {
+        return Decorated().ContainsAll(elements);
+    }
+
     ///<inheritdoc cref="ICollection{T}.CopyTo"/>
     public virtual void CopyTo(T[] array, int arrayIndex)
     {
         Decorated().CopyTo(array, arrayIndex);
     }
 
+    ///<inheritdoc cref="Extensions.CollectionExtensions.IsEmpty{T}"/>
+    public virtual bool IsEmpty()
+    {
+        return Decorated().IsEmpty();
+    }
+
     ///<inheritdoc cref="ICollection{T}.Remove"/>
     public virtual bool Remove(T item)
     {
         return Decorated().Remove(item);
+    }
+
+    ///<inheritdoc cref="Extensions.CollectionExtensions.RemoveAll{T}"/>
+    public virtual bool RemoveAll(IEnumerable<T> elements)
+    {
+        return Decorated().RemoveAll(elements);
     }
 
     ///<inheritdoc cref="ICollection{T}.Count"/>
