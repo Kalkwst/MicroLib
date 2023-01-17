@@ -6,7 +6,7 @@ namespace Collections.Collection;
 /// <summary>
 /// Decorates another <see cref="ICollection{T}"/> to provide additional behavior.
 /// </summary>
-/// <typeparam name="T"></typeparam>
+/// <typeparam name="T">The type parameter of the <see cref="ICollection{T}"/>.</typeparam>
 public abstract class AbstractCollectionDecorator<T> : ICollection<T>
 {
     // The collection being decorated.
