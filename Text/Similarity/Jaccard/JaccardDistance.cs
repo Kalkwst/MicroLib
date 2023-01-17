@@ -17,11 +17,8 @@ public class JaccardDistance : IEditDistance<double>
     /// <exception cref="ArgumentNullException">If any of the strings is null.</exception>
     public double Calculate(string left, string right)
     {
-        if (left == null || right == null)
-        {
-            throw new ArgumentNullException(left == null ? nameof(left) : nameof(right),
-                "Input cannot be null");
-        }
+        ArgumentNullException.ThrowIfNull(left, nameof(left));
+        ArgumentNullException.ThrowIfNull(right, nameof(right));
 
         return 1.0 - similarity.Calculate(left, right);
     }

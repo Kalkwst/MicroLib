@@ -8,16 +8,14 @@ public class FuzzyScore
 
     public FuzzyScore(CultureInfo? info)
     {
-        this.info = info ?? throw new ArgumentNullException(nameof(info));
+        ArgumentNullException.ThrowIfNull(info, nameof(info));
+        this.info = info;
     }
 
     public int CalculateFuzzyScore(string? term, string? query)
     {
-        if (term == null || query == null)
-        {
-            throw new ArgumentNullException(term == null ? nameof(term) : nameof(query)
-                , "Strings must not be null");
-        }
+        ArgumentNullException.ThrowIfNull(term, nameof(term));
+        ArgumentNullException.ThrowIfNull(query, nameof(query));
 
         var lowerCaseTerm = term.ToLower(info);
         var lowerCaseQuery = query.ToLower(info);

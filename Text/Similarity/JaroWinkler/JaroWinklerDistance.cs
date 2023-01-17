@@ -16,11 +16,8 @@ public class JaroWinklerDistance : IEditDistance<double>
     /// <exception cref="ArgumentNullException">If any of the two strings is null.</exception>
     public double Calculate(string left, string right)
     {
-        if (left == null || right == null)
-        {
-            throw new ArgumentNullException(left == null ? nameof(left) : nameof(right),
-                "Strings must not be null");
-        }
+        ArgumentNullException.ThrowIfNull(left, nameof(left));
+        ArgumentNullException.ThrowIfNull(right, nameof(right));
 
         return 1 - similarity.Calculate(left, right);
     }

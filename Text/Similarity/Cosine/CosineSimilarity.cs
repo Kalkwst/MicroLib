@@ -28,11 +28,8 @@ public class CosineSimilarity : ISimilarityScore<double>
 
     private static double GetCosineSimilarity(Dictionary<string, int> leftVector, Dictionary<string, int> rightVector)
     {
-        if (leftVector == null || rightVector == null)
-        {
-            throw new ArgumentNullException(leftVector == null ? nameof(leftVector) : nameof(rightVector),
-                "Vectors cannot be null");
-        }
+        ArgumentNullException.ThrowIfNull(leftVector, nameof(leftVector));
+        ArgumentNullException.ThrowIfNull(leftVector, nameof(leftVector));
 
         var intersection = GetIntersection(leftVector, rightVector);
         var dotProduct = GetDotProduct(leftVector, rightVector, intersection);

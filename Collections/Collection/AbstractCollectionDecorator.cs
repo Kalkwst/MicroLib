@@ -14,7 +14,8 @@ public abstract class AbstractCollectionDecorator<T> : ICollection<T>
 
     protected AbstractCollectionDecorator(ICollection<T> collection)
     {
-        _collection = collection ?? throw new ArgumentNullException(nameof(collection));
+        ArgumentNullException.ThrowIfNull(collection, nameof(collection));
+        _collection = collection;
     }
 
     protected ICollection<T> Decorated()
@@ -23,12 +24,12 @@ public abstract class AbstractCollectionDecorator<T> : ICollection<T>
     }
 
     public virtual IEnumerator<T> GetEnumerator() => Decorated().GetEnumerator();
-    
+
     IEnumerator IEnumerable.GetEnumerator()
     {
         return GetEnumerator();
     }
-    
+
     ///<inheritdoc cref="ICollection{T}.Add"/>
     public virtual void Add(T item)
     {
@@ -89,5 +90,5 @@ public abstract class AbstractCollectionDecorator<T> : ICollection<T>
     ///<inheritdoc cref="ICollection{T}.IsReadOnly"/>
     public virtual bool IsReadOnly => Decorated().IsReadOnly;
 
-    
+
 }
