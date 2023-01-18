@@ -16,7 +16,7 @@ jobs:
       id: list-projects
     - name: Install StyleCop and run
       run: |
-        projects=($(dotnet sln MicroLib.sln list))
+        projects=$(find . -name "*.csproj")
         for project in "${projects[@]}"; do
           project_path=$(find . -type d -name "$project")
           dotnet add "$project_path" package StyleCop.Analyzers
