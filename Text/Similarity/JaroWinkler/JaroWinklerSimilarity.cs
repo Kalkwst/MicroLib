@@ -99,8 +99,8 @@ public class JaroWinklerSimilarity : ISimilarityScore<double>
     {
         const double defaultScalingFactor = 0.1;
 
-        if (left == null || right == null)
-            throw new ArgumentNullException(left == null ? nameof(left) : nameof(right), "Strings must not be null");
+        ArgumentNullException.ThrowIfNull(left, nameof(left));
+        ArgumentNullException.ThrowIfNull(right, nameof(right));
 
         if (left.Equals(right))
             return 1d;

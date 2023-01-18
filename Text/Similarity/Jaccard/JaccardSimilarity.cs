@@ -15,8 +15,8 @@ public class JaccardSimilarity : ISimilarityScore<double>
     /// <exception cref="ArgumentException">If either string is null.</exception>
     public double Calculate(string left, string right)
     {
-        if (left == null || right == null)
-            throw new ArgumentNullException(left == null ? nameof(left) : nameof(right), "Input cannot be null");
+        ArgumentNullException.ThrowIfNull(left, nameof(left));
+        ArgumentNullException.ThrowIfNull(right, nameof(right));
 
         return CalculateJaccardSimilarity(left, right);
     }

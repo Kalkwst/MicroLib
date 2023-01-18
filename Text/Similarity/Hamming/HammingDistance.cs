@@ -22,8 +22,8 @@ public class HammingDistance : IEditDistance<int>
     /// <exception cref="ArgumentException">If the strings do not have the same length.</exception>
     public int Calculate(string? left, string? right)
     {
-        if (left == null || right == null)
-            throw new ArgumentNullException(left == null ? nameof(left) : nameof(right), "Strings must not be null");
+        ArgumentNullException.ThrowIfNull(left, nameof(left));
+        ArgumentNullException.ThrowIfNull(right, nameof(right));
 
         if (left.Length != right.Length)
             throw new ArgumentException("Strings must have the same length");
