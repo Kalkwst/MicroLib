@@ -14,6 +14,7 @@ jobs:
       id: list-projects
     - name: Install StyleCop and run
       run: |
+        echo $pwd
         projects=$(find . -name "*.csproj")
         for project in "${projects[@]}"; do
           project_path=$(find . -type d -name "$project")
