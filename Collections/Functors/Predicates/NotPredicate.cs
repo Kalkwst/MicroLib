@@ -32,8 +32,8 @@ public class NotPredicate<T> : IPredicateDecorator<T>
     /// Returns the predicate being evaluated.
     /// </summary>
     /// <returns>The predicate that is being evaluated.</returns>
-    public ImmutableArray<IPredicate<T>> GetPredicates()
+    public IPredicate<T>[] GetPredicates()
     {
-        return new ImmutableArray<IPredicate<T>>() { _predicate };
+        return new IPredicate<T>[] { _predicate };
     }
 }

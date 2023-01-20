@@ -22,7 +22,7 @@ public class AndPredicate<T> : IPredicateDecorator<T>
     {
         ArgumentNullException.ThrowIfNull(firstPredicate, nameof(firstPredicate));
         ArgumentNullException.ThrowIfNull(secondPredicate, nameof(secondPredicate));
-        
+
         _firstPredicate = firstPredicate;
         _secondPredicate = secondPredicate;
     }
@@ -38,8 +38,8 @@ public class AndPredicate<T> : IPredicateDecorator<T>
     }
 
     ///<inheritdoc cref="IPredicateDecorator{T}.GetPredicates"/>
-    public ImmutableArray<IPredicate<T>> GetPredicates()
+    public IPredicate<T>[] GetPredicates()
     {
-        return new ImmutableArray<IPredicate<T>>() { _firstPredicate, _secondPredicate };
+        return new IPredicate<T>[] { _firstPredicate, _secondPredicate };
     }
 }

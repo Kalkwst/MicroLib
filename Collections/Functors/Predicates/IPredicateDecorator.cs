@@ -12,5 +12,5 @@ public interface IPredicateDecorator<T> : IPredicate<T>
     /// Gets the predicates being decorated as an array.
     /// </summary>
     /// <returns>The predicates being decorated.</returns>
-    public ImmutableArray<IPredicate<T>> GetPredicates();
+    public IPredicate<T>[] GetPredicates();
 }

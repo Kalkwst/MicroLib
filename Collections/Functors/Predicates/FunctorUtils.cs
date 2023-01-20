@@ -11,9 +11,9 @@ public class FunctorUtils
     /// <param name="predicates">The predicates to copy.</param>
     /// <typeparam name="T">The type parameter of the <see cref="IPredicate{T}"/>.</typeparam>
     /// <returns>An <see cref="ImmutableArray{T}"/> of predicates.</returns>
-    public static ImmutableArray<IPredicate<T>> Copy<T>(params IPredicate<T>[] predicates)
+    public static IPredicate<T>[] Copy<T>(params IPredicate<T>[] predicates)
     {
-        return predicates.ToImmutableArray();
+        return predicates.ToArray();
     }
 
     public static void EnsureNotNull<T>(params IPredicate<T>[] predicates)

@@ -25,7 +25,7 @@ public abstract class AbstractQuantifierPredicate<T> : IPredicateDecorator<T>
     /// Gets the predicates.
     /// </summary>
     /// <returns>A copy of the predicates.</returns>
-    public ImmutableArray<IPredicate<T>> GetPredicates()
+    public IPredicate<T>[] GetPredicates()
     {
         return FunctorUtils.Copy(_predicates);
     }
