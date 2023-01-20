@@ -15,14 +15,14 @@ public class EqualPredicate<T> : IPredicate<T>
     /// <summary>
     /// The comparer to use for comparison.
     /// </summary>
-    private readonly IEqualityComparer<T> _comparer;
+    private readonly IComparer<T> _comparer;
 
     /// <summary>
     /// Creates a new EqualPredicate with a specific <paramref name="internalValue"/> and a specific <paramref name="comparer"/>.
     /// </summary>
     /// <param name="internalValue">The internal value of the predicate, can be null.</param>
     /// <param name="comparer">The comparer to use, cannot be null.</param>
-    public EqualPredicate(T internalValue, IEqualityComparer<T> comparer)
+    public EqualPredicate(T internalValue, IComparer<T> comparer)
     {
         _internalValue = internalValue;
         
@@ -37,6 +37,6 @@ public class EqualPredicate<T> : IPredicate<T>
     /// <returns>true if the input equals the internal value, false otherwise.</returns>
     public bool Evaluate(T element)
     {
-        return _comparer.Equals(_internalValue, element);
+        return _comparer.Compare(_internalValue, element) == 0;
     }
 }
