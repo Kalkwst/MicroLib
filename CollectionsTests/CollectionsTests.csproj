@@ -17,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Functors\Predicates" />
+      <ProjectReference Include="..\Collections\Collections.csproj" />
     </ItemGroup>
 
 </Project>
