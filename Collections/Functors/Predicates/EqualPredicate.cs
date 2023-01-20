@@ -17,9 +17,16 @@ public class EqualPredicate<T> : IPredicate<T>
     /// </summary>
     private readonly IEqualityComparer<T> _comparer;
 
+    /// <summary>
+    /// Creates a new EqualPredicate with a specific <paramref name="internalValue"/> and a specific <paramref name="comparer"/>.
+    /// </summary>
+    /// <param name="internalValue">The internal value of the predicate, can be null.</param>
+    /// <param name="comparer">The comparer to use, cannot be null.</param>
     public EqualPredicate(T internalValue, IEqualityComparer<T> comparer)
     {
         _internalValue = internalValue;
+        
+        ArgumentNullException.ThrowIfNull(comparer, nameof(comparer));
         _comparer = comparer;
     }
 
