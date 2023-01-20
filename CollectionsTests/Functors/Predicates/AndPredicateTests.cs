@@ -1,4 +1,5 @@
-﻿using Collections.Functors.Predicates;
+﻿using System.Collections.Immutable;
+using Collections.Functors.Predicates;
 
 namespace CollectionsTests.Functors.Predicates;
 
@@ -43,5 +44,17 @@ public class AndPredicateTests
         var predicate = new AndPredicate<string>(first, second);
         
         Assert.That(predicate.Evaluate("x"), Is.False);
+    }
+
+    [Test]
+    public void AndPredicate_ReturnsInternalPredicatesCorrectly()
+    {
+        var first = new NotNullPredicate<string>();
+        var second = new NullPredicate<string>();
+
+        var predicate = new AndPredicate<string>(first, second);
+        var expectedArray = new IPredicate<string>[] { first, second };
+
+        Assert.That(predicate.GetPredicates(), Is.EquivalentTo(expectedArray));
     }
 }
