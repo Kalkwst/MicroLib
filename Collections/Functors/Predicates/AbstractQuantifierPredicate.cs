@@ -15,6 +15,7 @@ public abstract class AbstractQuantifierPredicate<T> : IPredicateDecorator<T>
     /// <param name="predicates">The predicates to check.</param>
     public AbstractQuantifierPredicate(params IPredicate<T>[] predicates)
     {
+        FunctorUtils.EnsureNotNull(predicates);
         _predicates = predicates;
     }
     
