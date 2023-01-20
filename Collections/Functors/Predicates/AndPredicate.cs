@@ -20,6 +20,9 @@ public class AndPredicate<T> : IPredicateDecorator<T>
 
     public AndPredicate(IPredicate<T> firstPredicate, IPredicate<T> secondPredicate)
     {
+        ArgumentNullException.ThrowIfNull(firstPredicate, nameof(firstPredicate));
+        ArgumentNullException.ThrowIfNull(secondPredicate, nameof(secondPredicate));
+        
         _firstPredicate = firstPredicate;
         _secondPredicate = secondPredicate;
     }
