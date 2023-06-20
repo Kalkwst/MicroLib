@@ -120,8 +120,11 @@ Tests that include more information than required to pass the test have a higher
 public void Add_EmptyString_ReturnsZero()
 {
     var stringCalculator = new StringCalculator(); 
-    var actual = stringCalculator.Add("42"); 
+    var actual = stringCalculator.Add(""); 
     
+    Assert.Equal(0, actual);
+
+    actual = stringCalculator.Add("42"); 
     Assert.Equal(42, actual);
 }
 ```
