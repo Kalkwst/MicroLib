@@ -136,7 +136,7 @@ public void Add_EmptyString_ReturnsZero()
 public void Add_EmptyString_ReturnsZero()
 {
     var stringCalculator = new StringCalculator(); 
-    var actual = stringCalculator.Add("0"); 
+    var actual = stringCalculator.Add(""); 
     
     Assert.Equal(0, actual);
 }
